@@ -11,7 +11,7 @@ public class Main {
         String input = scanner.nextLine();
         scanner.close();
 
-        // Teste: Luis-M,Talita-F,Alexandre-M,Maíra-F,Vinicius-M,Leandro-M,Tatiane-F,Beatriz-F
+        // Teste: Luis-M,Talita-F,Alexandre-M,Maíra-F,Vinicius-M,Leandro-M,Tatiane-F,Beatriz-F,Larissa
         List<Pessoas> pessoas = List.of(input.split(",")).stream()
                 .map(pessoa -> {
                     String[] dados = pessoa.trim().split("-");
@@ -19,10 +19,12 @@ public class Main {
                     if (dados.length == 2) {
                         return new Pessoas(dados[0], dados[1]);
                     } else {
+                        System.out.println();
                         System.out.println("Entrada inválida ignorada: " + pessoa);
                         return null;
                     }
-                }).collect(Collectors.toList());
+                }).filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
         List<Pessoas> mulheres = pessoas.stream()
                 .filter(mulher -> "F".equalsIgnoreCase((mulher.getSexo())))
